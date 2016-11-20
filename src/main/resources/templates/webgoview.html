@@ -1,0 +1,42 @@
+<!DOCTYPE HMTL>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1"></meta>
+	<title>WebGo</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	      th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	      rel="stylesheet" media="screen" />
+	
+	<script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
+	        th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+	        
+	<script src="/js/webgo.js"></script>
+	            
+	<link href="../static/css/webgo.css"
+	          th:href="@{css/webgo.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+	<div class="webgo-container">
+		<div class="wrap center-block text-center">
+			<div id="turn">
+				<p id="turnlabel">Turn: </p>
+				<div id="turnindicator" class="black"></div>
+			</div>
+			<div id="buttons">
+				<button type="button" id="restartButton" class="btn btn-default btn-lg" onclick="restart()">Restart</button>
+				<button type="button" id="skipButton" class="btn btn-default btn-lg" onclick="skip()">Skip</button>
+				<button type="button" id="deleteButton" class="btn btn-default btn-lg" onclick="deletemode()">Delete mode</button>
+			</div>
+		</div>
+		<div id="gameboard">
+			<canvas id="webgoCanvas" class="center-block canvas" width="870" height="870">
+			</canvas>
+		</div>
+	</div>
+	<script type="text/javascript">
+	</script>
+</body>
+</html>
