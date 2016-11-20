@@ -2,8 +2,38 @@
  * 
  */
 window.onload = function() {
+	if(sessionStorage.getItem('boardId') == null || sessionStorage.getItem('boardId') == '')
+	{
+		var uuid = generateUUID();
+		sessionStorage.setItem('boardId', uuid);
+		
+		$.ajax({
+	        type: "POST",
+	        async: false,
+	        contentType: "application/json",
+	        url: "/register",
+	        data: JSON.stringify(uuid),
+	        dataType: 'json',
+	        timeout: 600000,
+	        success: function (data) {
+	        },
+	        error: function (e) {
+	        }
+		});		
+	}
+	
 	refreshBoard();
 }
+
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
 
 function startGame()
 {
@@ -152,6 +182,9 @@ function getStones()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/stones",
         dataType: 'json',
         timeout: 600000,
@@ -197,6 +230,9 @@ function removeStone(e)
 	$.ajax({
         type: "DELETE",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/remove",
         data: JSON.stringify(data),
         dataType: 'json',
@@ -228,7 +264,11 @@ function setStone(e)
 	
 	$.ajax({
         type: "POST",
+        async: false,
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/add",
         data: JSON.stringify(data),
         dataType: 'json',
@@ -236,6 +276,8 @@ function setStone(e)
         success: function (data) {
         	if(data == true)
         	{
+        		clearCanvas('webgoCanvas');
+        		initCanvas('webgoCanvas');
             	getStones();
             	if(turn == 1)
             		setTurn(0);
@@ -312,6 +354,9 @@ function getTurn()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/getturn",
         dataType: 'json',
         timeout: 600000,
@@ -332,6 +377,9 @@ function setTurn(turn)
 	$.ajax({
         type: "POST",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/setturn",
         data: JSON.stringify(turn),
         dataType: 'json',
@@ -353,6 +401,9 @@ function addSkip()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/skips/add",
         dataType: 'json',
         timeout: 600000,
@@ -371,6 +422,9 @@ function getSkipCount()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/skips",
         async: false,
         dataType: 'json',
@@ -391,6 +445,9 @@ function resetSkipCount()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/skips/reset",
         dataType: 'json',
         timeout: 600000,
@@ -408,6 +465,9 @@ function getWhites()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/whites",
         async: false,
         dataType: 'json',
@@ -430,6 +490,9 @@ function getBlacks()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/blacks",
         async: false,
         dataType: 'json',
