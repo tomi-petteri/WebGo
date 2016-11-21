@@ -55,3 +55,9 @@
 .inline {
      display: inline-block;     
 }
+
+.disableddiv
+{
+	pointer-events: none;
+    opacity: 0.4;
+}

@@ -1,7 +1,5 @@
 package Dao;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -167,11 +165,11 @@ public class MemoryBoardDao implements BoardDao {
 	}
 	
 	@Override
-	public void removeGroup(UUID boardId, UUID id) {
+	public void removeGroup(UUID boardId, Group gg) {
 		Group group = null;
 		
 		for(Group g : getBoard(boardId).getGroups()) { 
-		   if(g.getId().equals(id)) { 
+		   if(g.getId().equals(gg.getId())) { 
 		       group = g;
 		   }
 		}

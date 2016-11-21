@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+
 public class Board {
-	private	UUID id;
+	@Id
+	public String id;
+	private	UUID boardId;
 	private int turn; // 0 = white, 1 = black
 	private int skips;
 	private List<Stone> stones = new ArrayList<Stone>();
 	private List<Group> groups = new ArrayList<Group>();
 	
 	public UUID getId() {
-		return id;
+		return boardId;
 	}
 
 	public int getTurn() {
@@ -49,7 +53,7 @@ public class Board {
 
 	public Board(UUID boardId) {
 		super();
-		this.id = boardId;
+		this.boardId = boardId;
 		this.turn = 1;
 		this.skips = 0;
 		this.stones = new ArrayList<>();

@@ -3,14 +3,18 @@ package Entities;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+
 public class Group {
-	private	UUID id;
+	@Id
+	public String id;
+	private	UUID groupId;
 	private List<Stone> stones;
 	private int color;
 
 	public UUID getId() 
 	{
-		return id;
+		return groupId;
 	}
 	
 	public int getColor() {
@@ -36,7 +40,7 @@ public class Group {
 
 	public Group(List<Stone> stones, int color) {
 		super();
-		this.id = UUID.randomUUID();
+		this.groupId = UUID.randomUUID();
 		this.stones = stones;
 		this.color = color;
 	}

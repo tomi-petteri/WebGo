@@ -47,7 +47,7 @@ public interface BoardDao {
 
 	List<Group> getGroupsByColor(UUID boardId, int color);
 
-	void removeGroup(UUID boardId, UUID id);
+	void removeGroup(UUID boardId, Group group);
 
 	void clearGroups(UUID boardId);
 

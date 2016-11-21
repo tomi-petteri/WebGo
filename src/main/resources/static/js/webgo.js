@@ -112,6 +112,9 @@ function restart()
 	$.ajax({
         type: "GET",
         contentType: "application/json",
+        headers: {
+            "boardId":sessionStorage.getItem('boardId')
+        },
         url: "/reset",
         dataType: 'json',
         timeout: 600000,
@@ -404,6 +407,7 @@ function addSkip()
         headers: {
             "boardId":sessionStorage.getItem('boardId')
         },
+        async: false,
         url: "/skips/add",
         dataType: 'json',
         timeout: 600000,

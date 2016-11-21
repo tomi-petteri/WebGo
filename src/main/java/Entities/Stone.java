@@ -65,7 +65,7 @@ public class Stone {
 	}
 
 	public Stone() {
-		
+		this.timestamp = new Date();
 	}
 
 	public boolean isNeighbour(Stone s) {

@@ -15,7 +15,7 @@ import Entities.Stone;
 public class BoardService {
 
 	@Autowired
-	@Qualifier("memoryData")
+	@Qualifier("mongoData")
 	private BoardDao boardDao;
 	
 	public void registerBoard(UUID boardId) {
@@ -52,18 +52,18 @@ public class BoardService {
 			{
 				Group mergedGroup = neighbourGroups.get(0);
 
-				// liitetään ryhmät yhteen ja poistetaan mergetetty ryhmä
 				for(int i = 1; i < neighbourGroups.size(); i++)
 				{
 					Group g = neighbourGroups.get(i);
 					boardDao.addStones(boardId, mergedGroup.getId(), g.getStones());
-					boardDao.removeGroup(boardId, g.getId());
+					boardDao.removeGroup(boardId, g);
 				}
 
 				boardDao.addStone(boardId, stone);
 				boardDao.addStone(boardId, mergedGroup.getId(), stone);
 			}
 			
+			allStones = boardDao.getStones(boardId);
 			RemoveSurroundedGroups(boardId, allStones, boardDao.getGroups(boardId));
 		}
 		else
@@ -81,7 +81,7 @@ public class BoardService {
 			if(GroupSurroundedByOpponent(allStones, group))
 			{
 				boardDao.removeStones(boardId, group.getStones());
-				boardDao.removeGroup(boardId, group.getId());
+				boardDao.removeGroup(boardId, group);
 			}
 		}
 	}
